@@ -44,6 +44,7 @@ jobs:
           name: API Build
           command: |
             npm run api:build
+  # TODO: create credintials for aws and eb
   aws-cli-config:
     executor: aws-cli/default
     steps:
@@ -62,11 +63,15 @@ jobs:
       - eb/setup
       - checkout
       - run:
-          name: Deploy App
-          # TODO: Install, build, deploy in both apps
+          name: Deploy API
+          # TODO: Install, build, deploy API
           command: |
-            npm run deploy
-            
+            npm run api:deploy
+      - run:
+          name: Deploy Frontend
+          # TODO: Install, build, deploy the Frontend
+          command: |
+            npm run frontend:deploy
 workflows:
   udagram:
     jobs:
@@ -79,6 +84,7 @@ workflows:
           type: approval
           requires:
             - build
+      - aws-cli-config
       - deploy:
           requires:
             - hold
