@@ -84,7 +84,9 @@ workflows:
           type: approval
           requires:
             - build
-      - aws-cli-config
-      - deploy:
+      - aws-cli-config:
           requires:
             - hold
+      - deploy:
+          requires:
+            - aws-cli-config
