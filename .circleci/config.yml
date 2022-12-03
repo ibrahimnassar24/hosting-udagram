@@ -67,6 +67,7 @@ jobs:
           # TODO: Install, build, deploy API
           command: |
             npm run api:deploy
+      - aws-cli/setup
       - run:
           name: Deploy Frontend
           # TODO: Install, build, deploy the Frontend
