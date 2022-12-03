@@ -44,6 +44,13 @@ jobs:
           name: API Build
           command: |
             npm run api:build
+  aws-cli-config:
+    executor: aws-cli/default
+    steps:
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_DEFAULT_REGION
   # deploy step will run only after manual approval
   deploy:
     docker:
@@ -52,10 +59,6 @@ jobs:
     steps:
       - node/install:
           node-version: '14.15' 
-      - aws-cli/setup:
-        aws-access-key-id: AWS_ACCESS_KEY_ID
-        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-        aws-region: AWS_DEFAULT_RIGION
       - eb/setup
       - checkout
       - run:
