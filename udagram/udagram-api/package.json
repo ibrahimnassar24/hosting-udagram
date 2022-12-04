@@ -10,7 +10,8 @@
     "dev": "npx ts-node-dev --respawn --transpile-only ./src/server.ts",
     "prod": "npx tsc && node ./www/server.js",
     "clean": "rm -rf node_modules || true",
-    "deploy": "npm run build && eb use udagram-api-dev && eb deploy",
+    "setenv": "chmod +x ./bin/setenv.sh && ./bin/setenv.sh",
+    "deploy": "npm run build && eb use udagram-api-dev && npm run setenv && eb deploy",
     "build": "npm install && npm run tsc && npm run clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
